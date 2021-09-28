@@ -13,32 +13,62 @@ public class FilteringValues
     public static void main( String[] args )
     {
         Scanner input = new Scanner(System.in);
-        String evenNum;
+        int[] evenNum;
 
         // Asks for user input
-        System.out.println("Enter a list of numbers, separated by spaces: ");
+        System.out.print("Enter a list of numbers, separated by spaces: ");
         String numList = input.nextLine();
 
         // Gets string calculated in method filterEvenNumbers
         evenNum = filterEvenNumbers(numList);
 
         // Output
-        System.out.println("The even numbers are " + evenNum);
+        System.out.print("The even numbers are ");
+
+        for (int num: evenNum)
+            if (num != -1)
+                System.out.print(num + " ");
+
+        System.out.print(".");
     }
 
-    public static String filterEvenNumbers(String numList)
+    public static int[] filterEvenNumbers(String numList)
     {
-        int i;
+        int i, j;
         String evenNum = "";
         // Takes out spaces
         String[] filterStr = numList.split(" ");
-        int strLen = filterStr.length();
+        int strLen = filterStr.length;
 
-        for (i = 0; i < strLen; i++)
+        int num;
+        int[] array = new int[strLen];
+        int[] evenArray = new int[array.length];
+
+        // Initializes array
+        for (i = 0; i < evenArray.length; i++)
         {
-            evenNum += filterStr[i];
+            evenArray[i] = -1;
         }
 
-        return evenNum;
+        // Changes values from string to integer array
+        for (i = 0; i < array.length; i++)
+        {
+            num = Integer.parseInt(filterStr[i]);
+            array[i] = num;
+        }
+
+        i = 0;
+
+        // Only puts even number in new array
+        for (j = 0; j < strLen; j++)
+        {
+            if (array[j] % 2 == 0)
+            {
+                evenArray[i] = array[j];
+                i++;
+            }
+        }
+
+        return evenArray;
     }
 }

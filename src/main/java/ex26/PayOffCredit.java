@@ -26,7 +26,7 @@ public class PayOffCredit
         double monthlyPay = input.nextDouble();
 
         // Calculates months by accessing a method in class PaymentCalculator
-        months = Math.ceil(PaymentCalculator.calculateMonthsUntilPaidOff(balance, APR, monthlyPay));
+        months = PaymentCalculator.calculateMonthsUntilPaidOff(balance, APR, monthlyPay);
 
         // Output
         System.out.printf("It will take you %.0f months to pay off this card.", months);
@@ -42,6 +42,8 @@ class PaymentCalculator
         //n = -(1/30) * log(1 + b/p * (1 - (1 + i)^30)) / log(1 + i)
         // Calculates months
         double months = - (1/30.0) * Math.log(1 + balance / monthlyPay * (1 - Math.pow((1 + i), 30))) / Math.log(1 + i);
+
+        months = Math.ceil(months);
 
         return months;
     }
